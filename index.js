@@ -1,7 +1,10 @@
 const canvas = document.getElementById("canvas");
 const gl = canvas.getContext("webgl");
+const vertexShaderInput = document.getElementById("vertShader");
+const fragmentShaderInput = document.getElementById("fragShader");
+const runButton = document.getElementById("runShaders");
 
-function main() {
+function runShaders() {
   // check if webgl is working
   if (gl === null) {
     alert("webgl not working, probably your browser's fault :)");
@@ -9,25 +12,10 @@ function main() {
   }
 
   // source code for vertex shader
-  const vertexShaderSource = `
-        attribute vec2 position;
-        void main() {
-            gl_Position = vec4(position, 0.0, 1.0);
-        }
-    `;
+  const vertexShaderSource = vertexShaderInput.value;
 
   // source code for fragment shader
-  const fragmentShaderSource = `
-        precision mediump float;
-        void main() {
-            gl_FragColor = vec4(
-                sin(gl_FragCoord.x / 100.0),
-                cos(gl_FragCoord.y / 100.0),
-                1.0,
-                0.0
-            );
-        }
-    `;
+  const fragmentShaderSource = fragmentShaderInput.value;
 
   // before attaching shaders gotta createShader, add shaderSource, compileShader
   const vertexShader = gl.createShader(gl.VERTEX_SHADER);
@@ -69,4 +57,10 @@ const clearCanvas = () => {
   gl.clear(gl.COLOR_BUFFER_BIT);
 };
 
-main();
+runButton.onclick = () => {
+  try {
+    runShaders();
+  } catch (error) {
+    console.log(error);
+  }
+};
