@@ -21,9 +21,9 @@ function main() {
         precision mediump float;
         void main() {
             gl_FragColor = vec4(
-                sin(gl_FragCoord.x),
-                cos(gl_FragCoord.y),
-                cos(gl_FragCoord.x),
+                sin(gl_FragCoord.x / 100.0),
+                cos(gl_FragCoord.y / 100.0),
+                1.0,
                 0.0
             );
         }
