@@ -64,3 +64,5 @@ runButton.onclick = () => {
     console.log(error);
   }
 };
+
+clearCanvas();
