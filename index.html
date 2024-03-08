@@ -8,33 +8,35 @@
   </head>
 
   <body>
-    <div>
-      <p><label for="vertShader">Vertex shader:</label></p>
-      <textarea id="vertShader" name="vertShader" rows="10" cols="100">
-        attribute vec2 position;
-        void main() {
-            gl_Position = vec4(position, 0.0, 1.0);
-        }
-      </textarea>
-      <p><label for="fragShader">Fragment shader:</label></p>
-      <textarea id="fragShader" name="fragShader" rows="10" cols="100">
-        precision mediump float;
-        void main() {
-            gl_FragColor = vec4(
-                sin(gl_FragCoord.x / 100.0),
-                cos(gl_FragCoord.y / 100.0),
-                1.0,
-                0.0
-            );
-        }
-      </textarea>
-      <br />
-      <button type="button" id="runShaders">Run shaders</button>
-    </div>
-    <div>
-      <p>Output:</p>
-      <canvas width="640" height="480" id="canvas"></canvas>
-    </div>
+    <main id="mainContainer">
+      <div id="shaderContainer">
+        <p><label for="vertShader">Vertex shader:</label></p>
+        <textarea id="vertShader" name="vertShader" rows="10" cols="100">
+          attribute vec2 position;
+          void main() {
+              gl_Position = vec4(position, 0.0, 1.0);
+          }
+        </textarea>
+        <p><label for="fragShader">Fragment shader:</label></p>
+        <textarea id="fragShader" name="fragShader" rows="10" cols="100">
+          precision mediump float;
+          void main() {
+              gl_FragColor = vec4(
+                  sin(gl_FragCoord.x / 100.0),
+                  cos(gl_FragCoord.y / 100.0),
+                  1.0,
+                  0.0
+              );
+          }
+        </textarea>
+        <br />
+        <button type="button" id="runShaders">Run shaders</button>
+      </div>
+      <div id="canvasContainer">
+        <p>Output:</p>
+        <canvas width="640" height="480" id="canvas"></canvas>
+      </div>
+    </main>
 
     <script src="index.js" type="module"></script>
   </body>

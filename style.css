@@ -1,5 +1,29 @@
 body {
-    background-color: #111;
-    color: #ccc;
-    text-align: center;
+  background-color: #111;
+  color: #ccc;
+  text-align: center;
+}
+
+textarea{
+  max-width: 100%;
+}
+
+#mainContainer {
+  max-width: 100%;
+}
+
+#shaderContainer {
+  display: inline-block;
+  max-width: 50%;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 1rem;
+}
+
+#canvasContainer {
+  display: inline-block;
+  max-width: 50%;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 1rem;
 }
