@@ -4,6 +4,47 @@ const vertexShaderInput = document.getElementById("vertShader");
 const fragmentShaderInput = document.getElementById("fragShader");
 const runButton = document.getElementById("runShaders");
 
+function getVertexShaderSource() {
+  return vertexShaderInput.value;
+}
+
+function getFragmentShaderSource() {
+  return fragmentShaderInput.value;
+}
+
+function loadShader(gl, type, source) {
+  const shader = gl.createShader(type);
+
+  // Send the source to the shader object
+
+  gl.shaderSource(shader, source);
+
+  // Compile the shader program
+
+  gl.compileShader(shader);
+
+  // See if it compiled successfully
+
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    alert(
+      `An error occurred compiling the shaders: ${gl.getShaderInfoLog(shader)}`,
+    );
+    gl.deleteShader(shader);
+    return null;
+  }
+
+  return shader;
+}
+
+function setupProgram(vertexShader, fragmentShader) {
+  const program = gl.createProgram();
+  gl.attachShader(program, vertexShader);
+  gl.attachShader(program, fragmentShader);
+  gl.linkProgram(program);
+  gl.useProgram(program);
+  return program;
+}
+
 function runShaders() {
   // check if webgl is working
   if (gl === null) {
@@ -11,26 +52,13 @@ function runShaders() {
     return;
   }
 
-  // source code for vertex shader
-  const vertexShaderSource = vertexShaderInput.value;
+  const vertexShaderSource = getVertexShaderSource();
+  const fragmentShaderSource = getFragmentShaderSource();
 
-  // source code for fragment shader
-  const fragmentShaderSource = fragmentShaderInput.value;
+  const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+  const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
 
-  // before attaching shaders gotta createShader, add shaderSource, compileShader
-  const vertexShader = gl.createShader(gl.VERTEX_SHADER);
-  gl.shaderSource(vertexShader, vertexShaderSource);
-  gl.compileShader(vertexShader);
-  const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
-  gl.shaderSource(fragmentShader, fragmentShaderSource);
-  gl.compileShader(fragmentShader);
-
-  // createProgram, and then attachShader for both shaders, linkProgram, useProgram
-  const program = gl.createProgram();
-  gl.attachShader(program, vertexShader);
-  gl.attachShader(program, fragmentShader);
-  gl.linkProgram(program);
-  gl.useProgram(program);
+  const program = setupProgram(vertexShader, fragmentShader);
 
   // vertices of the triangle
   const vertices = new Float32Array([0.0, 0.5, -0.5, -0.5, 0.5, -0.5]);
