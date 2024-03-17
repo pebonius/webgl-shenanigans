@@ -5,20 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>;)))</title>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
+      integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <script src="index.js" type="module"></script>
   </head>
 
   <body>
     <main id="mainContainer">
       <div id="shaderContainer">
-        <p><label for="vertShader">Vertex shader:</label></p>
-        <textarea id="vertShader" name="vertShader" rows="10" cols="100">
-attribute vec2 position;
-void main() {
-    gl_Position = vec4(position, 0.0, 1.0);
-}
-        </textarea>
         <p><label for="fragShader">Fragment shader:</label></p>
-        <textarea id="fragShader" name="fragShader" rows="10" cols="100">
+        <textarea id="fragShader" name="fragShader" rows="20" cols="100">
 precision mediump float;
 void main() {
     gl_FragColor = vec4(
@@ -30,14 +31,12 @@ void main() {
 }
         </textarea>
         <br />
-        <button type="button" id="runShaders">Run shaders</button>
+        <button type="button" id="runShaders">Run</button>
       </div>
       <div id="canvasContainer">
         <p>Output:</p>
         <canvas width="640" height="480" id="canvas"></canvas>
       </div>
     </main>
-
-    <script src="index.js" type="module"></script>
   </body>
 </html>
